@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+{{super()}}
+<div class="wrapper">
+    <div class="header-img">
+    </div>
+    <div class="posts">
+        <h1>Новости</h1>
+        <div class="news">
+            {% for p in posts %}
+            <h3>{{p.title}}</h3>
+            <p>{{p.text}}</p>
+            <a href="/post/{{p.id}}">Подробнее</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="contacts">
+        <h1 id="contacts">Контакты <i class="fa-solid fa-address-book"></i></h1>
+        <div class="contacts-wrap">
+            <h2>Адрес <i class="fa-solid fa-map-location-dot"></i></h2>
+            <div class="map"></div>
+            <p>пр. Станке Димитрова, 3, Брянск, Брянская обл., 241037</p>
+            <p><i class="fa-solid fa-phone"></i>+7-(4832)-59-95-55 - Советский район</p>
+            <h2>Часы работы <i class="fa-regular fa-clock"></i></h2>
+            <p>Понедельник 08:00 - 17:00</p>
+            <p>Вторник 08:00 - 17:00</p>
+            <p>Среда 08:00 - 17:00</p>
+            <p>Четверг 08:00 - 17:00</p>
+            <p>Пятница 08:00 - 17:00</p>
+            <p>Суббота - закрыто</p>
+            <p>Воскресенье - закрыто</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

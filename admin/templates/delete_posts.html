@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+{% block content %}
+{{super()}}
+<div class="post-content">
+    <div class="post_hd"><h1>Посты</h1>
+        <a href="{{url_for('.add_post')}}">Добавить</a>
+    </div>
+    <div class="message-wrapper">
+        <h1>Системные сообщения</h1>
+        {% for cat, msg in get_flashed_messages(True) %}
+
+        <div class="flash {{cat}}"> {{msg}}</div>
+        {% endfor %}
+    </div>
+    {% for post in pagination.items %}
+    <div class="post">
+        <b>
+            <p>Пост номер : {{post.id}}</p>
+            <p class="post-title">Заголовок: {{ post.title }}</p>
+            <p class="post-text">Текст поста: {{ post.text }}</p>
+            <div class="links">
+                <a href="{{url_for('.delete_posts')}}/{{post.id}}">Удалить</a>
+                <a href="{{url_for('.update_posts')}}/{{post.id}}">Изменить</a>
+            </div>
+        </b>
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    {% if pagination.has_prev %}
+    <span>
+            <a class='page-number' href="{{ url_for('.delete_posts', page=pagination.prev_num) }}">
+                {{ '<<<' }}
+            </a>
+        </span>
+    {% endif %}
+
+    {% for number in pagination.iter_pages() %}
+    {% if pagination.page != number %}
+    <span>
+                    <a class='page-number'
+                       href="{{ url_for('.delete_posts', page=number) }}">
+                    {{ number }}
+                    </a>
+            </span>
+    {% else %}
+    <span class='current-page-number'>{{ number }}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% if pagination.has_next %}
+    <span>
+            <a class='page-number'
+               href="{{ url_for('.delete_posts', page=pagination.next_num) }}">
+                {{ '>>>' }}
+            </a>
+        </span>
+    {% endif %}
+</div>
+{% endblock %}

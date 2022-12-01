@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+{{super()}}
+<div class="do-order">
+    <h1>Заказ</h1>
+    <form action="" method="post" name="do_order">
+        {{FlaskForm.hidden_tag()}}
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}"> {{msg}}</div>
+        {% endfor %}
+        <p>Введите ваше имя: <br></p>
+        {{FlaskForm.order_name(size=38)}}
+        <p>Введите ваше номер телефона: <br></p>
+        {{FlaskForm.phone(size=38)}}
+        <p>Введите ваш адрес: <br></p>
+        {{FlaskForm.adress(size=38)}}
+        <p>
+            Пожалуйста, выбериете блюдо 1: <br>
+        </p>
+        <div class="select-field">{{FlaskForm.dish1(size=3)}}</div>
+        <p>{{dishes.price}}</p>
+        <p>
+            Пожалуйста, выбериете блюдо 2: <br>
+        </p>
+        <div class="select-field">{{FlaskForm.dish2(size=3)}}</div>
+        <p>
+            Пожалуйста, выбериете блюдо 3: <br>
+        </p>
+        <div class="select-field">{{FlaskForm.dish3(size=3)}}</div>
+        <p>
+            Пожалуйста, выбериете блюдо 4: <br>
+        </p>
+        <div class="select-field">{{FlaskForm.dish4(size=3)}}</div>
+        <p>
+            Пожалуйста, выбериете блюдо 5: <br>
+        </p>
+        <div class="select-field">{{FlaskForm.dish5(size=3)}}</div>
+        {% if amo != 0 %}
+        <p>Итого: {{amo}} рублей к оплате</p>
+        {% endif %}
+        <div class="order-but">
+            <p>{{FlaskForm.submit1}}</p>
+            <p>{{FlaskForm.submit2}}</p>
+        </div>
+</div>
+{% endblock %}

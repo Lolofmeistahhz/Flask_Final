@@ -1,0 +1,30 @@
+{% extends "admin_base.html" %}
+{% block content %}
+{{super()}}
+
+<div class="login">
+    <h1>Авторизация</h1>
+
+        {% for cat, msg in get_flashed_messages(True) %}
+
+        <div class="flash-log {{cat}}"> {{msg}}</div>
+        {% endfor %}
+    <form action="" method="post" name="login">
+        {{FlaskForm.hidden_tag()}}
+        <p>
+            Пожалуйста, введите ваш логин:<br>
+            {{FlaskForm.login(size=40)}}<br>
+        </p>
+        <p>
+            Пожалуйста, введите ваш пароль:<br>
+            {{FlaskForm.password(size=40)}}<br>
+        </p>
+        <div class="but">
+            <p>{{FlaskForm.submit}}</p>
+        </div>
+    </form>
+    <div class="na">
+        <a href="{{url_for('.index')}}">На главную</a>
+    </div>
+</div>
+{% endblock %}

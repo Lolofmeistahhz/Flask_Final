@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{{super()}}
+{% for p in post %}
+<div class="post-content">
+    <div class="post_cur">
+        <h1>Запись № {{p.id}}</h1>
+        <p>{{p.title}}</p>
+        <p>{{p.text}}</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

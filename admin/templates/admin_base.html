@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('.static', filename='css/styles.css') }}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/de369a1960.js" crossorigin="anonymous"></script>
+    <title>
+        {% if title %}
+        {{ title }}
+        {% else %}
+        Ryabtsew food
+        {% endif %}
+    </title>
+</head>
+<body>
+{% if menu %}
+<div class="nav">
+    {% block menu %}
+    <ul class="menu">
+        {% for m in menu -%}
+        <li><a href="{{ m['url'] }}">{{ m['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endblock menu -%}
+
+</div>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

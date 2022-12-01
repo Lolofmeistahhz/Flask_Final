@@ -1,0 +1,324 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+body {
+    font-family: Bahnschrift;
+    color: #1E262D;
+}
+
+.nav {
+    margin: 0px auto;
+    width: 1100px;
+    height: 100px;
+    background-color: #1E262D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu li {
+    display: inline-block;
+    padding: 0px 20px 0px 20px;
+}
+
+.nav .menu li > a {
+    color: white;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.nav .menu li > a:hover {
+    color: navajowhite;
+    font-size: 25px;
+}
+
+.wrapper {
+    margin: 0px auto;
+    width: 1100px;
+    background-color: #f2f2f2;
+}
+
+.footer-wrapper {
+    width: 1100px;
+    margin: 0px auto;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E262D;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.footer li {
+    display: inline-block;
+    padding-left: 45px;
+}
+
+.footer li > a i {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+.post-content {
+    width: 1100px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+}
+
+.post_hd {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 20px;
+    border-bottom: 2px solid #1E262D;
+}
+
+.post_hd a {
+    font-size: 20px;
+    color: #1E262D;
+}
+
+.post_hd a:hover {
+    color: blue;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.add-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    margin: 300px auto;
+}
+
+.add-post input {
+    font-size: 20px;
+    height: 40px;
+    width: 400px;
+}
+
+.but input {
+    width: 400px;
+    margin-top: 20px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.post {
+    padding: 20px;
+}
+
+.post p {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.links a {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #1E262D;
+}
+
+.links a:hover {
+    color: blue;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.pagination {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination span {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.page-number {
+    color: #d64161;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.current-page-number {
+    color: #666
+}
+
+.dish-wrap {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: #f2f2f2;
+    gap: 20px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.order-wrap {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    gap: 20px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.order {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.dish {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 300px;
+    height: 330px;
+}
+
+.dish img {
+    height: 200px;
+}
+
+.flash {
+    padding: 5px;
+    width: 1040px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.flash.success {
+    border: 2px solid #21DB56;
+    background: #AEFFC5;
+}
+
+.flash.error {
+    border: 2px solid #FF4343;
+    background: #FF9C9C;
+}
+
+.flash-log {
+    padding: 5px;
+    width: 400px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.flash-log.success {
+    border: 2px solid #21DB56;
+    background: #AEFFC5;
+}
+
+.flash-log.error {
+    border: 2px solid #FF4343;
+    background: #FF9C9C;
+}
+.login {
+
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.login h1 {
+    display: block;
+    font-size: 30px;
+    margin: 10px;
+    font-family: Bahnschrift;
+}
+
+.login p {
+    margin-top: 10px;
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.login input {
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.login .but input {
+    width: 406px;
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.message-wrapper {
+    width: 1050px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border: 5px solid #1E262D;
+}
+
+.info-wrapper {
+    width: 1060px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+}
+
+.info {
+    display: flex;
+}
+
+.about {
+    margin-left: 40px;
+    font-size: 22px;
+    text-align: justify;
+}
+
+.order-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 1060px;
+}
+
+.order-list p {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 20px;
+}
+
+.order-list b {
+    font-size: 18px;
+    padding: 0 3px 0 3px;
+    text-decoration: none;
+    color: #1E262D;
+}
+
