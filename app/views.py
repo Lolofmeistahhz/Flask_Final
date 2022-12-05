@@ -1,6 +1,8 @@
+
+
 from admin.admin import admin
 from app import app, db
-from flask import render_template, request, flash,git
+from flask import render_template, request, flash
 from app.forms import OrderForm
 from app.models import Posts, Menu, Orders
 
@@ -68,14 +70,4 @@ def do_order():
 
 
 
-@app.route('/update_server', methods=['POST'])
-    def webhook():
-        if request.method == 'POST':
-            repo = git.Repo('Lolofmeistahhz/Flask_Final')
-            origin = repo.remotes.origin
 
-            origin.pull()
-
-            return 'Updated PythonAnywhere successfully', 200
-        else:
-            return 'Wrong event type', 400
