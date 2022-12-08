@@ -1,9 +1,9 @@
 {% extends "admin_base.html" %}
 {% block content %}
 {{super()}}
-<div class="add-post">
+<div class="add-dish">
     <h1>Добавить блюдо</h1>
-    <form action="" method="post" name="add_dish">
+    <form action="" method="post" name="add_dish" enctype="multipart/form-data">
         {{FlaskForm.hidden_tag()}}
         <p>
             Пожалуйста, введите название блюда:<br>
@@ -18,8 +18,8 @@
             {{FlaskForm.price(size=40)}}<br>
         </p>
         <p>
-            Пожалуйста, укажите абсолютный адрес фотографии:<br>
-            {{FlaskForm.photo(size=40)}}<br>
+            Пожалуйста, выберите фотографию : <br>(формат .jpg/.jpeg/.png)<br>
+             <div class="photo">{{ FlaskForm.photo}}</div>
         </p>
 
         <div class="but">

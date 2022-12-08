@@ -1,9 +1,11 @@
+import os
 from datetime import datetime
 
 from flask import Blueprint, render_template, url_for, redirect, session, request, flash
+from werkzeug.utils import secure_filename
 
 from admin.forms import LoginForm, PostForm, DishForm
-from app import db
+from app import db, app
 
 from app.models import Users, Posts, Menu, Orders
 
@@ -19,6 +21,9 @@ menu = [{'name': 'Вход', 'url': '/admin/login'}, {'name': 'Посты', 'url
 
 #словарь для меню
 
+UPLOAD_FOLDER = 'admin/static/images/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def login_admin():
     session['adminlogged'] = 1
 
@@ -36,24 +41,30 @@ def logout_admin():
 @admin.route('/')
 @admin.route('/index')
 def index():
+    # u = Users(login='root')
+    # u.set_password('root')
+    # db.session.add(u)
+    # db.session.commit()
     return render_template('admin_index.html', title='Админ - панель', menu=menu)
 #главная страница
 
 @admin.route('/login', methods=['GET', 'POST'])
 def login():
+    # u = Users(login='root',usertype=0)
+    # u.set_password('root')
+    # db.session.add(u)
+    # db.session.commit()
     if is_logged(): # если уже авторизован
         flash('Вы уже успешно авторизовались в системе',
               category='error')
         return redirect(url_for('.index'))
     form = LoginForm() # инициализация объекта класса LoginForm
     if form.validate_on_submit(): # если данные формы валидны, то
-        user = Users.query.filter_by(login=form.login.data, pasword=form.password.data).first() # запрос - выбираем
+        user = Users.query.filter_by(login=form.login.data).first() # запрос - выбираем
         # пользователей, где данные совпадают с значениями из формы
-        if user is not None: # если юзер найден
+        if user and user.check_password(form.password.data):
             login_admin() # сессия успешно
-            flash('Вы  успешно авторизовались в системе',
-                  category='success')
-            return redirect(url_for('.index'))
+            return redirect(url_for('admin.index'))
         else:
             flash('Неверный логин и/или пароль',
                   category='error')
@@ -171,14 +182,18 @@ def add_dish():
         return redirect(url_for('.login'))
     elif is_logged():
         form = DishForm(request.form, csrf_enabled=False)
-        if form.validate_on_submit():
-            d = Menu(name=form.name.data, description=form.description.data, price=form.price.data,
-                     photo=form.photo.data)
-            db.session.add(d)
-            db.session.commit()
-            flash('Блюдо было добавлено',
-                  category='success')
-            return redirect(url_for('.delete_dishes'))
+        if request.method == 'POST' and form.validate_on_submit():
+            f = request.files['photo']
+            if f.filename.split(".")[-1] in ALLOWED_EXTENSIONS and "image" in f.mimetype:
+                filename = secure_filename(f.filename)
+                f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                d = Menu(name=form.name.data, description=form.description.data, price=form.price.data,
+                         photo=filename)
+                db.session.add(d)
+                db.session.commit()
+                flash('Блюдо было добавлено',
+                      category='success')
+                return redirect(url_for('.delete_dishes'))
         return render_template('add_dish.html', title='Добавить блюдо', FlaskForm=form)
 
 @admin.route('/update_dish')
@@ -193,16 +208,20 @@ def update_dish(num):
     elif is_logged():
         dish = Menu.query.get(num)
         form = DishForm(request.form, csrf_enabled=False)
-        if request.method == "POST":
-            dish.name = form.name.data
-            dish.description = form.description.data
-            dish.price = form.price.data
-            dish.photo = form.photo.data
-            db.session.commit()
-            flash('Информация о блюде была изменена',
-                  category='success')
-            return redirect(url_for('.delete_dishes'))
-        return render_template('update_dishes.html', title='Удалить блюдо', dish=dish, FlaskForm=form)
+        if request.method == 'POST' and form.validate_on_submit():
+            f = request.files['photo']
+            if f.filename.split(".")[-1] in ALLOWED_EXTENSIONS and "image" in f.mimetype:
+                filename = secure_filename(f.filename)
+                f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                dish.name = form.name.data
+                dish.description = form.description.data
+                dish.price = form.price.data
+                dish.photo = filename
+                db.session.commit()
+                flash('Информация о блюде была изменена',
+                      category='success')
+                return redirect(url_for('.delete_dishes'))
+        return render_template('add_dish.html', title='Удалить блюдо', dish=dish, FlaskForm=form)
 
 @admin.route('/orders')
 def orders():

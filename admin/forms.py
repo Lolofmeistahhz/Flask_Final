@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, FileField
 from wtforms.validators import DataRequired
 
 
@@ -25,7 +25,7 @@ class DishForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     price = IntegerField('price', default=0)
-    photo = StringField('photo')
+    photo = FileField('photo')
     submit = SubmitField('Сохранить', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
