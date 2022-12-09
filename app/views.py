@@ -1,10 +1,9 @@
-from pip._internal.vcs import git
-
 from admin.admin import admin
 from app import app, db
 from flask import render_template, request, flash
 from app.forms import OrderForm
 from app.models import Posts, Menu, Orders
+import git
 
 app.register_blueprint(admin, url_prefix='/admin')
 # подтягиваем блу-принт, это дает возможность обратиться к урлу /admin - чтобы перейти в другой шаблон
@@ -73,6 +72,21 @@ def do_order():
 def update_server():
     repo = git.Repo('./Flask_Final')
     origin = repo.remotes.origin
-    repo.create_head("main",origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+    repo.create_head("main", origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
     origin.pull()
     return 'Updated PythonAnywhere successfully', 200
+
+
+@app.route('/update_server', methods=['POST'])
+
+
+def webhook():
+    if request.method == 'POST':
+        repo = git.Repo('Lolofmeistahhz/Flask_Final')
+        origin = repo.remotes.origin
+
+        origin.pull()
+
+        return 'Updated PythonAnywhere successfully', 200
+    else:
+        return 'Wrong event type', 400
