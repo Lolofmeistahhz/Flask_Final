@@ -1,7 +1,5 @@
 from datetime import datetime
-
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from app import db, app
 
 
@@ -23,7 +21,7 @@ class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     text = db.Column(db.String(500), nullable=False)
-    data = db.Column(db.DateTime, default=datetime.utcnow)
+    data = db.Column(db.DateTime,default= datetime.utcnow)
 
     def __repr__(self):
         return f"<posts {self.id}>"
@@ -39,20 +37,21 @@ class Menu(db.Model):
     def __repr__(self):
         return f"<menu {self.id}>"
 
-
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    order_name = db.Column(db.String(100), nullable=False)
-    phone = db.Column(db.String(11), nullable=False)
-    adress = db.Column(db.String(255), nullable=False)
-    order_data = db.Column(db.DateTime, default=datetime.utcnow)
-    dish1 = db.Column(db.Integer, db.ForeignKey('menu.id'), nullable=True)
-    dish2 = db.Column(db.Integer, db.ForeignKey('menu.id'), nullable=True)
-    dish3 = db.Column(db.Integer, db.ForeignKey('menu.id'), nullable=True)
-    dish4 = db.Column(db.Integer, db.ForeignKey('menu.id'), nullable=True)
-    dish5 = db.Column(db.Integer, db.ForeignKey('menu.id'), nullable=True)
-    amount = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.String(30),nullable = False)
+    order_name = db.Column(db.String(100),nullable = False)
+    phone = db.Column(db.String(11),nullable = False)
+    adress = db.Column(db.String(255),nullable = False)
+    order_data = db.Column(db.DateTime,default = datetime.utcnow)
+    dish1 = db.Column(db.Integer,db.ForeignKey('menu.id'),nullable=True)
+    dish2 = db.Column(db.Integer, db.ForeignKey('menu.id'),nullable=True)
+    dish3 = db.Column(db.Integer, db.ForeignKey('menu.id'),nullable=True)
+    dish4 = db.Column(db.Integer, db.ForeignKey('menu.id'),nullable=True)
+    dish5 = db.Column(db.Integer, db.ForeignKey('menu.id'),nullable=True)
+    amount = db.Column(db.Integer,nullable = False)
+    status = db.Column(db.String(50),nullable = False, default="В обработке")
+
+
     def __repr__(self):
         return f"<orders {self.id}>"
 

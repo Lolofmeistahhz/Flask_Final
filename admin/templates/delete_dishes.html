@@ -17,7 +17,7 @@
     {% for d in pagination.items %}
     {% if d.price !=0 %}
     <div class="dish">
-        <img src="/admin/static/images/{{d.photo}}" width="300px"/>
+        <img src="/admin/static/images/{{d.photo}}" width="300px">
         <p class="post-title">Название : {{ d.name }}</p>
         <p class="post-text">Описание : {{ d.description }}</p>
         <p class="post-text">Цена : {{ d.price }}</p>

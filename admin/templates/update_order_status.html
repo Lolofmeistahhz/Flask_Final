@@ -1,0 +1,14 @@
+{% extends "admin_base.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="login">
+        <form action="" method="post" name="update_post" class="flex">
+            {{ FlaskForm.hidden_tag() }}
+            {{ FlaskForm.status(size=3) }}
+            {{ FlaskForm.submit(size=3) }}
+        </form>
+        <div class="na">
+            <a href="{{ url_for('.orders') }}">Назад</a>
+        </div>
+    </div>
+{% endblock %}

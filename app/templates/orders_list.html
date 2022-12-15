@@ -1,0 +1,42 @@
+{% extends "admin_base.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="post-content">
+        <div class="post_hd"><h1>Заказы</h1>
+            <form action="" method="post" name="filter_order">
+                {{ FlaskForm.hidden_tag() }}
+                {{ FlaskForm.search }}
+                {{ FlaskForm.submit(size=3) }}
+            </form>
+        </div>
+        <div class="order-wrap">
+            {% for d in pagination.items %}
+                {% if d.price !=0 %}
+                    <div class="order">
+                        <p class="post-title"><b>Заказ номер </b> {{ d.id }}</p>
+                        <p class="post-text"><b>Заказчик :</b><br>{{ d.order_name }}<br>{{ d.adress }}</p>
+                        <p class="post-text"><b>Заказ :</b>
+                            <br>{{ d.n1 }} <br>{{ d.n2 }} <br>{{ d.n3 }}<br> {{ d.n4 }} <br>{{ d.n5 }}<br></p>
+                        <p class="post-text"><b>Итого :</b><br>{{ d.amount }}</p>
+                        <p class="post-text"><b>Текущий статус :</b><br>{{ d.status }}</p>
+                        {% if d.status == 'В обработке' %}
+                            <p>С вами свяжутся в течение 5 минут - ожидайте</p>
+                        {% endif %}
+                        {% if d.status == 'Принят в работу' %}
+                            <p>Заказ готовится, время ожидания ~ 45 минут</p>
+                        {% endif %}
+                        {% if d.status == 'На доставке' %}
+                            <p>Курьер спешит к вам, время ожидания ~ 45 минут</p>
+                        {% endif %}
+                        {% if d.status == 'Выполнен' %}
+                            <p>Спасибо что заказываете еду у нас, ждем снова</p>
+                        {% endif %}
+                        {% if d.status == 'Отклонен' %}
+                            <p>Вы не подтвердили или отменили заказ</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

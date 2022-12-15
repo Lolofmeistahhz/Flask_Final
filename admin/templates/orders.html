@@ -1,70 +1,74 @@
 {% extends "admin_base.html" %}
 {% block content %}
-{{super()}}
-<div class="post-content">
-    <div class="post_hd"><h1>Заказы</h1>
-    </div>
-
-</div>
-<div class="order-wrap">
-    <div class="message-wrapper">
-        <h1>Системные сообщения</h1>
-        {% for cat, msg in get_flashed_messages(True) %}
-
-        <div class="flash {{cat}}"> {{msg}}</div>
-        {% endfor %}
-    </div>
-    <div class="order-list">
-        {% for dish in dishes %}
-        <p>ID - блюда <b>{{ dish.id }}</b>, название блюда : {{dish.name}}, цена : {{dish.price}}</p>
-        {% endfor %}
-    </div>
-    {% for d in pagination.items %}
-    {% if d.price !=0 %}
-    <div class="order">
-        <p class="post-title"><b>Имя заказчика</b> <br> {{ d.order_name }}</p>
-        <p class="post-text"><b>Контактные данные :</b><br>{{ d.phone }}<br>{{ d.adress }}</p>
-        <p class="post-text"><b>Заказ :</b> <br> {{ d.dish1 }} {{ d.dish2 }} {{ d.dish3 }} {{ d.dish4 }} {{ d.dish5
-            }}<br></p>
-        <p class="post-text"><b>Итого :</b><br>{{ d.amount }}</p>
-        <div class="links">
-            <a href="{{url_for('.orders')}}/{{d.id}}">Отработан</a>
+    {{ super() }}
+    <div class="post-content">
+        <div class="post_hd"><h1>Заказы</h1>
         </div>
+        <div class="order-wrap">
+            <div class="message-wrapper">
+                <h1>Системные сообщения</h1>
+                {% for cat, msg in get_flashed_messages(True) %}
 
+                    <div class="flash {{ cat }}"> {{ msg }}</div>
+                {% endfor %}
+            </div>
+            <div class="order-list">
+                {% for dish in dishes %}
+                    <p>ID - блюда <b>{{ dish.id }}</b>, название блюда : {{ dish.name }}, цена : {{ dish.price }}</p>
+                {% endfor %}
+            </div>
+            {% for d in pagination.items %}
+                {% if d.price !=0 %}
+                    <div class="order">
+                        <p class="post-title"><b>Имя заказчика</b> <br> {{ d.order_name }}</p>
+                        <p class="post-text"><b>Контактные данные :</b><br>{{ d.phone }}<br>{{ d.adress }}</p>
+                        <p class="post-text"><b>Заказ :</b>
+                            <br>{{ d.n1 }}<br> {{ d.n2}} <br>{{ d.n3 }}<br> {{ d.n4 }} <br>{{ d.n5 }}<br></p>
+                        <p class="post-text"><b>Итого :</b><br>{{ d.amount }}</p>
+                        <p class="post-text"><b>Текущий статус :</b><br>{{ d.status }}</p>
+
+                        <div class="links">
+                            <a href="{{ url_for('.orders') }}/edit/{{ d.id }}">Изменить статус</a>
+                        </div>
+
+                        <div class="links">
+                            <a href="{{ url_for('.orders') }}/del/{{ d.id }}">Удалить</a>
+                        </div>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-    {% endif %}
-    {% endfor %}
-</div>
-</div>
-<div class="pagination">
-    {% if pagination.has_prev %}
-    <span>
+    <div class="pagination">
+        {% if pagination.has_prev %}
+            <span>
             <a class='page-number' href="{{ url_for('.orders', page=pagination.prev_num) }}">
                 {{ '<<<' }}
             </a>
         </span>
-    {% endif %}
+        {% endif %}
 
-    {% for number in pagination.iter_pages() %}
-    {% if pagination.page != number %}
-    <span>
+        {% for number in pagination.iter_pages() %}
+            {% if pagination.page != number %}
+                <span>
                     <a class='page-number'
                        href="{{ url_for('.orders', page=number) }}">
                     {{ number }}
                     </a>
             </span>
-    {% else %}
-    <span class='current-page-number'>{{ number }}</span>
-    {% endif %}
-    {% endfor %}
+            {% else %}
+                <span class='current-page-number'>{{ number }}</span>
+            {% endif %}
+        {% endfor %}
 
-    {% if pagination.has_next %}
-    <span>
+        {% if pagination.has_next %}
+            <span>
             <a class='page-number'
                href="{{ url_for('.orders', page=pagination.next_num) }}">
                 {{ '>>>' }}
             </a>
         </span>
-    {% endif %}
-</div>
+        {% endif %}
+    </div>
 {% endblock %}
