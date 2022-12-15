@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, FileField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, FileField, validators
+from wtforms.validators import DataRequired, Length
 
 
 class LoginForm(FlaskForm):
-    login = StringField('login', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()])
+    login = StringField('login', validators=[DataRequired(),Length(min=4,max=50)])
+    password = PasswordField('password', validators=[DataRequired(),Length(min=4)])
     submit = SubmitField('Вход')
 
     def __init__(self, *args, **kwargs):
@@ -13,8 +13,8 @@ class LoginForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    title = StringField('title', validators=[DataRequired()])
-    text = StringField('text', validators=[DataRequired()])
+    title = StringField('title', validators=[DataRequired(),Length(min=3,max=100)])
+    text = StringField('text', validators=[DataRequired(),Length(min=10,max=500)])
     submit = SubmitField('Сохранить', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
@@ -22,8 +22,8 @@ class PostForm(FlaskForm):
 
 
 class DishForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
-    description = StringField('description', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired(),Length(min=4,max=100)])
+    description = StringField('description', validators=[DataRequired(),Length(min=10,max=500)])
     price = IntegerField('price', default=0)
     photo = FileField('photo')
     submit = SubmitField('Сохранить', validators=[DataRequired()])

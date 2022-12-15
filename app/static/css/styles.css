@@ -293,3 +293,69 @@ body {
     background: #FF9C9C;
 }
 
+.flash {
+    padding: 5px;
+    width: 1040px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+
+
+.flash-log {
+    padding: 5px;
+    width: 400px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.flash-log.success {
+    border: 2px solid #21DB56;
+    background: #AEFFC5;
+}
+
+.flash-log.error {
+    border: 2px solid #FF4343;
+    background: #FF9C9C;
+}
+.login {
+
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.login h1 {
+    display: block;
+    font-size: 30px;
+    margin: 10px;
+    font-family: Bahnschrift;
+}
+
+.login p {
+    margin-top: 10px;
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.login input {
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.login .but input {
+    width: 406px;
+    font-family: Bahnschrift;
+    font-size: 18px;
+}
+
+.message-wrapper {
+    width: 1050px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border: 5px solid #1E262D;
+}

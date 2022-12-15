@@ -103,6 +103,19 @@ body {
     width: 400px;
     margin: 300px auto;
 }
+.add-dish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    margin: 250px auto;
+}
+
+.add-dish input {
+    font-size: 20px;
+    height: 40px;
+    width: 400px;
+}
 
 .add-post input {
     font-size: 20px;
@@ -322,16 +335,6 @@ body {
     color: #1E262D;
 }
 
-.add-dish {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-    margin: 250px auto;
-}
-
-.add-dish input {
-    font-size: 20px;
-    height: 40px;
-    width: 400px;
+.photo{
+    padding-top: 20px;
 }
